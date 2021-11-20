@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Nav from "./components/Nav/index";
+import Landing from "./pages/index";
+import Movie from "./components/Movie/index";
+import store from "./stores/store";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <Nav />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/movie/:id" component={Movie} />
+        </Fragment>
+      </Router>
+    </Provider>
   );
 }
 
