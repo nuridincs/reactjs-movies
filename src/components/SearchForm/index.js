@@ -2,14 +2,24 @@ import React, { Component } from "react";
 import { FaSearch } from "react-icons/fa";
 import { searchMovie, fetchMovies, setLoading } from "../../stores/actions/search";
 import { connect } from "react-redux";
+import _ from "lodash";
 
 class SearchForm extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      searchValue: ''
+    };
+    this.debouncedHandler = _.debounce(this.handleChange.bind(this),1000);
+  }
+
   componentDidMount() {
     this.props.fetchMovies('marvel');
   }
 
   handleChange = e => {
     this.props.searchMovie(e.target.value);
+    this.props.fetchMovies(e.target.value);
   };
 
   handleSubmit = e => {
@@ -30,7 +40,7 @@ class SearchForm extends Component {
                 className="form-control form-control-lg"
                 name="searchText"
                 placeholder="Search Movies ..."
-                onChange={this.handleChange}
+                onChange={this.debouncedHandler}
               />
               <div className="input-group-append">
                 <button type="submit" className="btn btn-primary btn-lg">

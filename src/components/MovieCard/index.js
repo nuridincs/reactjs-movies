@@ -21,9 +21,8 @@ export class MovieCard extends Component {
     this.setState({ show: false });
   };
 
-  onPreviewImg = (imgUrl) => {
+  onPreviewImg = () => {
     this.showModal();
-    console.log('onPreviewImg imgUrl', imgUrl);
   }
 
   render() {
@@ -35,7 +34,7 @@ export class MovieCard extends Component {
             <img
               className="w-50 img-fluid mt-4 mx-auto"
               src={movie.Poster}
-              onClick={() => this.onPreviewImg(movie.Poster)}
+              onClick={this.onPreviewImg}
               alt="Movie Cover" />
             <div className="card-body d-flex flex-column">
               <h5 className=" card-title">
