@@ -1,6 +1,6 @@
 # React Movies
 
-### Setup ###
+### Usage ###
 
 * copy .env-example to .env
 * input omdbapi api key
