@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { FaChevronCircleRight } from "react-icons/fa";
 import Modal from "../Modal/index";
+import './card.css';
 
 export class MovieCard extends Component {
   constructor() {
@@ -29,25 +30,36 @@ export class MovieCard extends Component {
     const { movie } = this.props;
     return (
       <>
-        <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
-          <div className="text-center h-100 bg-light card">
-            <img
-              className="w-50 img-fluid mt-4 mx-auto"
-              src={movie.Poster}
-              onClick={this.onPreviewImg}
-              alt="Movie Cover" />
-            <div className="card-body d-flex flex-column">
-              <h5 className=" card-title">
-                {movie.Title} - {movie.Year}
-              </h5>
+        <div className="movie-card">
+          <div className="movie-header img-cover" style={{background: 'url(' + movie.Poster + ')'}}  onClick={this.onPreviewImg}>
+          </div>
+          <div className="movie-content">
+            <div className="movie-content-header">
+              <a href="#">
+                <h3 className="movie-title">{ movie.Title }</h3>
+              </a>
+            </div>
+            <div className="movie-info">
+              <div className="info-section">
+                <label>Type</label>
+                <span>{ movie.Type }</span>
+              </div>{/*date,time*/}
+              <div className="info-section">
+                <label>Year</label>
+                <span>{ movie.Year }</span>
+              </div>{/*screen*/}
+            </div>
+
+            <div className="text-center mt-5">
               <Link
-                className="mt-auto btn btn-primary btn-lg"
+                className="mt-auto btn btn-primary btn-sm btn-block"
                 to={"/movie/" + movie.imdbID}
               >
                 <span className="mr-2">Details</span>{" "}
-                <FaChevronCircleRight size="18" />
+                <FaChevronCircleRight size="15" />
               </Link>
             </div>
+
           </div>
         </div>
         <Modal show={this.state.show} handleClose={this.hideModal} data={movie} />
